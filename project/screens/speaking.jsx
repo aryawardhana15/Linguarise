@@ -226,7 +226,7 @@ const ScreenSpeaking = ({ t, onScreen }) => {
           </div>
         </div>
         <Card padding={16}>
-          <div style={{ fontSize: 16, lineHeight: 1.7, fontFamily: "var(--lr-font-display)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 0", fontSize: 16, lineHeight: 1.8, fontFamily: "var(--lr-font-display)" }}>
             {transcript.map((seg, i) => (
               <span key={i} style={{
                 color: colors[seg.t], fontWeight: seg.t === "ok" ? 400 : 600,
@@ -234,6 +234,7 @@ const ScreenSpeaking = ({ t, onScreen }) => {
                 marginRight: 4, position: "relative",
                 background: seg.t === "filler" ? "rgba(245,166,35,0.1)" : seg.t === "imp" ? "rgba(107,63,160,0.1)" : "transparent",
                 padding: seg.t !== "ok" ? "1px 4px" : "0", borderRadius: 4,
+                whiteSpace: "nowrap",
               }}>
                 {seg.w}
                 {seg.note && <sup style={{ color: "var(--lr-success)", fontSize: 10, fontWeight: 700, marginLeft: 2 }}>→{seg.note}</sup>}
