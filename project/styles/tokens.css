@@ -1,0 +1,161 @@
+/* LinguaRise — Design Tokens
+   Modern Purple direction. All values are CSS variables so the Tweaks panel
+   can rewrite them at runtime (theme/density/typography toggles).
+*/
+:root {
+  /* ── Palette: Default "Modern Purple" ─────────────────────────────── */
+  --lr-primary-50:  #F4EEFB;
+  --lr-primary-100: #E6D7F5;
+  --lr-primary-200: #C9A9E9;
+  --lr-primary-400: #9263CC;
+  --lr-primary-500: #7A4BB8;
+  --lr-primary-600: #6B3FA0;   /* brand */
+  --lr-primary-700: #553283;
+  --lr-primary-900: #2D1857;
+
+  --lr-accent:      #FFD64A;   /* energetic yellow */
+  --lr-accent-2:    #FF6B5C;   /* coral, used sparingly */
+  --lr-success:     #3DBA8C;
+  --lr-warn:        #F5A623;
+  --lr-danger:      #E5484D;
+
+  /* ── Surfaces ─────────────────────────────────────────────────────── */
+  --lr-bg:          #F7F5FB;   /* very subtle warm-purple white */
+  --lr-bg-elev:     #FFFFFF;
+  --lr-bg-deep:     #1A0F2E;   /* near-black with purple undertone */
+  --lr-line:        rgba(45, 24, 87, 0.08);
+  --lr-line-strong: rgba(45, 24, 87, 0.16);
+
+  /* ── Text ─────────────────────────────────────────────────────────── */
+  --lr-ink:         #1A0F2E;   /* deep purple-black */
+  --lr-ink-2:       #4A3B6B;
+  --lr-ink-3:       #7A6F92;
+  --lr-on-primary:  #FFFFFF;
+
+  /* ── Type ─────────────────────────────────────────────────────────── */
+  --lr-font-ui:     "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --lr-font-display: "Fraunces", "Plus Jakarta Sans", Georgia, serif;
+  --lr-font-mono:   "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ── Density (regular) ────────────────────────────────────────────── */
+  --lr-pad-card:    20px;
+  --lr-pad-screen:  20px;
+  --lr-gap:         16px;
+  --lr-gap-sm:      10px;
+  --lr-radius-sm:   10px;
+  --lr-radius:      18px;
+  --lr-radius-lg:   24px;
+  --lr-radius-xl:   28px;
+
+  /* ── Shadows ──────────────────────────────────────────────────────── */
+  --lr-shadow-sm: 0 1px 2px rgba(45,24,87,0.04), 0 2px 6px rgba(45,24,87,0.04);
+  --lr-shadow:    0 2px 6px rgba(45,24,87,0.06), 0 8px 24px rgba(45,24,87,0.08);
+  --lr-shadow-lg: 0 8px 24px rgba(45,24,87,0.12), 0 24px 64px rgba(45,24,87,0.12);
+  --lr-shadow-purple: 0 8px 20px rgba(107, 63, 160, 0.28);
+
+  /* ── Motion ───────────────────────────────────────────────────────── */
+  --lr-ease:        cubic-bezier(0.34, 1.56, 0.64, 1);  /* spring-y */
+  --lr-ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Theme: Indigo (alt) ──────────────────────────────────────────── */
+[data-theme="indigo"] {
+  --lr-primary-50:  #EEF1FB;
+  --lr-primary-100: #D7DEF5;
+  --lr-primary-200: #A9B5E9;
+  --lr-primary-400: #6378CC;
+  --lr-primary-500: #4B5FB8;
+  --lr-primary-600: #3F4FA0;
+  --lr-primary-700: #323F83;
+  --lr-primary-900: #181F4B;
+  --lr-accent:      #FFD64A;
+  --lr-bg:          #F4F5FB;
+  --lr-ink:         #181F4B;
+  --lr-ink-2:       #3B4A6B;
+  --lr-ink-3:       #6F7A92;
+  --lr-bg-deep:     #0F142A;
+}
+
+/* ── Theme: Plum (deep) ───────────────────────────────────────────── */
+[data-theme="plum"] {
+  --lr-primary-50:  #FBEEF6;
+  --lr-primary-100: #F5D7EA;
+  --lr-primary-200: #E9A9D1;
+  --lr-primary-400: #CC63A8;
+  --lr-primary-500: #B84B92;
+  --lr-primary-600: #8E2F6E;
+  --lr-primary-700: #6B2455;
+  --lr-primary-900: #3F0F30;
+  --lr-bg:          #FAF5F8;
+  --lr-ink:         #3F0F30;
+  --lr-ink-2:       #6B3B57;
+  --lr-bg-deep:     #1F0915;
+}
+
+/* ── Theme: Forest (calm) ─────────────────────────────────────────── */
+[data-theme="forest"] {
+  --lr-primary-50:  #ECF6F0;
+  --lr-primary-100: #CFEADC;
+  --lr-primary-200: #97D2B0;
+  --lr-primary-400: #4FA677;
+  --lr-primary-500: #3D8C63;
+  --lr-primary-600: #2F6E4D;
+  --lr-primary-700: #24553B;
+  --lr-primary-900: #0F2A1C;
+  --lr-accent:      #FFC83D;
+  --lr-bg:          #F4F8F5;
+  --lr-ink:         #0F2A1C;
+  --lr-ink-2:       #3B5747;
+  --lr-bg-deep:     #0A1A11;
+}
+
+/* ── Dark mode ─────────────────────────────────────────────────────── */
+[data-dark="1"] {
+  --lr-bg:          #14091F;
+  --lr-bg-elev:     #1F1230;
+  --lr-bg-deep:     #0A0413;
+  --lr-ink:         #F4EEFB;
+  --lr-ink-2:       #C9B6E0;
+  --lr-ink-3:       #8A7AA8;
+  --lr-line:        rgba(255, 255, 255, 0.08);
+  --lr-line-strong: rgba(255, 255, 255, 0.16);
+  --lr-shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --lr-shadow:    0 4px 12px rgba(0,0,0,0.5);
+  --lr-shadow-lg: 0 16px 48px rgba(0,0,0,0.6);
+}
+
+/* ── Density: compact ────────────────────────────────────────────── */
+[data-density="compact"] {
+  --lr-pad-card:    14px;
+  --lr-pad-screen:  16px;
+  --lr-gap:         12px;
+  --lr-gap-sm:      8px;
+  --lr-radius:      14px;
+  --lr-radius-lg:   18px;
+}
+
+/* ── Density: comfy ──────────────────────────────────────────────── */
+[data-density="comfy"] {
+  --lr-pad-card:    24px;
+  --lr-pad-screen:  24px;
+  --lr-gap:         20px;
+  --lr-gap-sm:      14px;
+  --lr-radius:      22px;
+  --lr-radius-lg:   28px;
+}
+
+/* ── Type direction: Plus Jakarta + Fraunces (default) ───────────── */
+[data-type="display"] {
+  --lr-font-ui:      "Plus Jakarta Sans", -apple-system, system-ui, sans-serif;
+  --lr-font-display: "Fraunces", Georgia, serif;
+}
+/* Geometric — Manrope + Space Grotesk */
+[data-type="geometric"] {
+  --lr-font-ui:      "Manrope", -apple-system, system-ui, sans-serif;
+  --lr-font-display: "Space Grotesk", "Manrope", sans-serif;
+}
+/* Neutral — Inter for both */
+[data-type="neutral"] {
+  --lr-font-ui:      "Inter", -apple-system, system-ui, sans-serif;
+  --lr-font-display: "Inter", -apple-system, system-ui, sans-serif;
+}

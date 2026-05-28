@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>LinguaRise — Hi-Fi Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles/tokens.css"/>
+<style>
+  html, body { margin: 0; padding: 0; background: #14091F; min-height: 100vh; font-family: "Plus Jakarta Sans", system-ui, sans-serif; }
+  *, *::before, *::after { box-sizing: border-box; }
+  button { font-family: inherit; }
+  /* Hide scrollbars within phone screens for cleanliness */
+  .lr-scroll::-webkit-scrollbar { width: 0; height: 0; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="components/ios-frame.jsx"></script>
+<script type="text/babel" src="components/design-canvas.jsx"></script>
+<script type="text/babel" src="components/tweaks-panel.jsx"></script>
+
+<script type="text/babel" src="screens/_ui.jsx"></script>
+<script type="text/babel" src="screens/onboarding.jsx"></script>
+<script type="text/babel" src="screens/auth.jsx"></script>
+<script type="text/babel" src="screens/home.jsx"></script>
+<script type="text/babel" src="screens/connect.jsx"></script>
+<script type="text/babel" src="screens/speaking.jsx"></script>
+<script type="text/babel" src="screens/learn.jsx"></script>
+<script type="text/babel" src="screens/sim.jsx"></script>
+<script type="text/babel" src="screens/sim_more.jsx"></script>
+<script type="text/babel" src="screens/score.jsx"></script>
+<script type="text/babel" src="screens/pricing.jsx"></script>
+<script type="text/babel" src="screens/extras.jsx"></script>
+<script type="text/babel" src="screens/safety_more.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "purple",
+  "dark": false,
+  "type": "display",
+  "density": "regular",
+  "plan": "basic",
+  "lang": "id"
+}/*EDITMODE-END*/;
+
+// ─── Prototype Player ────────────────────────────────────────
+// Mode satu layar interaktif — navigasi antar screen via klik
+function PrototypePlayer({ screenEl, screen, themeAttrs, t, dark, setScreen, onViewCanvas }) {
+  const [vp, setVp] = React.useState({ w: window.innerWidth, h: window.innerHeight });
+  React.useEffect(() => {
+    const r = () => setVp({ w: window.innerWidth, h: window.innerHeight });
+    window.addEventListener('resize', r);
+    return () => window.removeEventListener('resize', r);
+  }, []);
+
+  const PW = 402, PH = 874, BAR = 52;
+  const scale = Math.min(1, (vp.w - 48) / PW, (vp.h - BAR - 32) / PH);
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, background: '#14091F', fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif', overflow: 'hidden' }}>
+      {/* Top bar */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: BAR,
+        display: 'flex', alignItems: 'center', padding: '0 20px',
+        borderBottom: '1px solid rgba(255,255,255,0.07)',
+        background: 'rgba(20,9,31,0.95)', backdropFilter: 'blur(12px)',
+        zIndex: 10,
+      }}>
+        <span style={{ color: '#fff', fontWeight: 700, fontSize: 15, letterSpacing: -0.3 }}>linguarise</span>
+        <span style={{
+          marginLeft: 10, background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.45)',
+          fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 99, letterSpacing: 0.8,
+        }}>PROTOTYPE</span>
+        <span style={{ marginLeft: 12, color: 'rgba(255,255,255,0.3)', fontSize: 12 }}>{screen}</span>
+        <div style={{ flex: 1 }} />
+        <button
+          onClick={onViewCanvas}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.13)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.07)'}
+          style={{
+            background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.13)',
+            color: 'rgba(255,255,255,0.75)', borderRadius: 8, padding: '6px 13px',
+            fontSize: 13, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit',
+            display: 'flex', alignItems: 'center', gap: 7, transition: 'background .15s',
+          }}>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="0.5" y="0.5" width="5" height="5" rx="1.2"/><rect x="7.5" y="0.5" width="5" height="5" rx="1.2"/>
+            <rect x="0.5" y="7.5" width="5" height="5" rx="1.2"/><rect x="7.5" y="7.5" width="5" height="5" rx="1.2"/>
+          </svg>
+          Lihat Canvas
+        </button>
+      </div>
+
+      {/* Phone centered below bar */}
+      <div style={{
+        position: 'absolute', top: BAR, bottom: 0, left: 0, right: 0,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>
+        <div style={{ width: PW * scale, height: PH * scale, flexShrink: 0 }}>
+          <div style={{ width: PW, height: PH, transform: `scale(${scale})`, transformOrigin: 'top left' }}>
+            <div {...themeAttrs} style={{ width: PW, height: PH, borderRadius: 48, overflow: 'hidden', background: 'var(--lr-bg)' }}>
+              <IOSDevice width={PW} height={PH} dark={dark}>
+                <div className="lr-scroll" style={{ position: 'relative', minHeight: PH, background: 'var(--lr-bg)', overflow: 'hidden' }}>
+                  {screenEl}
+                  {['home','connect','ai','sim','profile'].includes(screen) && (
+                    <BottomTabs active={screen} t={t.lang} onChange={setScreen} />
+                  )}
+                </div>
+              </IOSDevice>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── App ─────────────────────────────────────────────────────
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const [screen, setScreen] = React.useState("splash");
+  const [mode, setMode] = React.useState("prototype");
+  const [paywallOpen, setPaywallOpen] = React.useState(false);
+
+  const themeAttrs = {
+    "data-theme": t.theme === "purple" ? undefined : t.theme,
+    "data-dark": t.dark ? "1" : undefined,
+    "data-density": t.density === "regular" ? undefined : t.density,
+    "data-type": t.type === "display" ? undefined : t.type,
+  };
+
+  const handlePlan = (newPlan) => {
+    setTweak("plan", newPlan);
+    setScreen("home");
+  };
+
+  const screenProps = {
+    t: t.lang,
+    plan: t.plan,
+    onScreen: setScreen,
+    onPlan: handlePlan,
+    onPaywall: () => setScreen("pricing"),
+  };
+
+  const screenMap = {
+    splash: <ScreenSplash {...screenProps} onDone={() => setScreen("welcome")}/>,
+    welcome: <ScreenWelcome {...screenProps} onDone={() => setScreen("register")}/>,
+    register: <ScreenRegister {...screenProps} onDone={() => setScreen("placement")}/>,
+    login: <ScreenLogin {...screenProps}/>,
+    parental: <ScreenParental {...screenProps}/>,
+    placement: <ScreenPlacement {...screenProps} onDone={() => setScreen("home")}/>,
+    home: <ScreenHome {...screenProps}/>,
+    notifications: <ScreenNotifications {...screenProps}/>,
+    connect: <ScreenConnect {...screenProps}/>,
+    topics: <ScreenTopics {...screenProps}/>,
+    coReading: <ScreenCoReading {...screenProps}/>,
+    safetalk: <ScreenSafeTalk {...screenProps}/>,
+    ai: <ScreenAILearn {...screenProps}/>,
+    speaking: <ScreenSpeaking {...screenProps}/>,
+    listening: <ScreenListening {...screenProps}/>,
+    writing: <ScreenWriting {...screenProps}/>,
+    reading: <ScreenReading {...screenProps}/>,
+    sim: <ScreenSimHome {...screenProps}/>,
+    simSetup: <ScreenSimSetup {...screenProps}/>,
+    simBriefing: <ScreenSimBriefing {...screenProps}/>,
+    simSession: <ScreenSimSession {...screenProps}/>,
+    simReport: <ScreenSimReport {...screenProps}/>,
+    score: <ScreenScore {...screenProps}/>,
+    pricing: <ScreenPricing {...screenProps}/>,
+    paymentSuccess: <ScreenPaymentSuccess {...screenProps}/>,
+    profile: <ScreenProfile {...screenProps}/>,
+    prospeak: <ScreenProSpeak {...screenProps}/>,
+    settings: <ScreenSettings {...screenProps}/>,
+    achievements: <ScreenAchievements {...screenProps}/>,
+    vocab: <ScreenVocab {...screenProps}/>,
+  };
+
+  // ── PROTOTYPE MODE ──
+  if (mode === "prototype") {
+    const currentEl = screenMap[screen] || (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#999', fontSize: 14 }}>
+        Screen "{screen}" belum ada
+      </div>
+    );
+    return (
+      <PrototypePlayer
+        screenEl={currentEl}
+        screen={screen}
+        themeAttrs={themeAttrs}
+        t={t}
+        dark={t.dark}
+        setScreen={setScreen}
+        onViewCanvas={() => setMode("canvas")}
+      />
+    );
+  }
+
+  // ── CANVAS MODE ──
+  const sections = [
+    {
+      id: "onboarding",
+      title: "01 · Onboarding, Auth & Placement",
+      screens: [
+        { id: "splash", label: "Splash" },
+        { id: "welcome", label: "Welcome" },
+        { id: "login", label: "Login" },
+        { id: "register", label: "Register · OTP · Setup" },
+        { id: "parental", label: "Parental Consent (<17)" },
+        { id: "placement", label: "Placement + CEFR" },
+      ],
+    },
+    {
+      id: "core",
+      title: t.lang === "en" ? "02 · Home & Connect" : "02 · Home & Connect",
+      screens: [
+        { id: "home", label: "Home Dashboard" },
+        { id: "notifications", label: "Notification Center" },
+        { id: "connect", label: "Connect · Smart Match" },
+        { id: "topics", label: "Topics Library" },
+        { id: "coReading", label: "Co-Reading (Activity)" },
+        { id: "safetalk", label: "SafeTalk · Report" },
+      ],
+    },
+    {
+      id: "learn",
+      title: t.lang === "en" ? "03 · AI Learn modules" : "03 · AI Learn (modul)",
+      screens: [
+        { id: "ai", label: "AI Learn Hub" },
+        { id: "speaking", label: "Speaking Analysis" },
+        { id: "listening", label: "Listening" },
+        { id: "writing", label: "Writing Review" },
+        { id: "reading", label: "Reading" },
+      ],
+    },
+    {
+      id: "career",
+      title: t.lang === "en" ? "04 · Career Sim & Score" : "04 · Career Sim & Skor",
+      screens: [
+        { id: "sim", label: "Sim Home (Scenarios)" },
+        { id: "simSetup", label: "Sim · Setup" },
+        { id: "simBriefing", label: "Sim · Briefing" },
+        { id: "simSession", label: "Sim · In-Session" },
+        { id: "simReport", label: "Sim · Report" },
+        { id: "score", label: "LinguaScore Detail" },
+      ],
+    },
+    {
+      id: "monetize",
+      title: t.lang === "en" ? "05 · Subscription, Tutor & Profile" : "05 · Langganan, Tutor & Profil",
+      screens: [
+        { id: "pricing", label: "Plans / Paywall" },
+        { id: "paymentSuccess", label: "Payment Success" },
+        { id: "prospeak", label: "ProSpeak · Tutors" },
+        { id: "profile", label: "Profile" },
+        { id: "achievements", label: "Achievements" },
+        { id: "vocab", label: "Vocab Book" },
+        { id: "settings", label: "Settings" },
+      ],
+    },
+  ];
+
+  const renderFramed = (id) => (
+    <div {...themeAttrs} style={{ width: 402, height: 874, borderRadius: 48, background: "var(--lr-bg)" }}>
+      <IOSDevice width={402} height={874} dark={t.dark}>
+        <div className="lr-scroll" style={{ position: "relative", minHeight: 874, background: "var(--lr-bg)" }}>
+          {screenMap[id]}
+          {["home","connect","ai","sim","profile"].includes(id) && (
+            <BottomTabs active={id} t={t.lang} onChange={(next) => {
+              window.dispatchEvent(new CustomEvent("dc:close-focus"));
+              setScreen(next);
+            }}/>
+          )}
+        </div>
+      </IOSDevice>
+    </div>
+  );
+
+  return (
+    <React.Fragment>
+      <DesignCanvas title="LinguaRise — Hi-Fi Prototype" subtitle="Speak with Purpose. Rise with Confidence.">
+        {sections.map(sec => (
+          <DCSection key={sec.id} id={sec.id} title={sec.title}>
+            {sec.screens.map(s => (
+              <DCArtboard key={s.id} id={s.id} label={s.label} width={402} height={874}>
+                {renderFramed(s.id)}
+              </DCArtboard>
+            ))}
+          </DCSection>
+        ))}
+
+        <TweaksPanel>
+          <TweakSection label={t.lang === "en" ? "Theme" : "Tema"}/>
+          <TweakColor
+            label={t.lang === "en" ? "Color theme" : "Warna tema"}
+            value={t.theme}
+            options={[
+              { label: "Purple", value: "purple", color: "#6B3FA0" },
+              { label: "Indigo", value: "indigo", color: "#3F4FA0" },
+              { label: "Plum", value: "plum", color: "#8E2F6E" },
+              { label: "Forest", value: "forest", color: "#2F6E4D" },
+            ].map(o => o.color)}
+            onChange={(v) => {
+              const map = { "#6B3FA0": "purple", "#3F4FA0": "indigo", "#8E2F6E": "plum", "#2F6E4D": "forest" };
+              setTweak("theme", map[v] || "purple");
+            }}
+          />
+          <TweakToggle label={t.lang === "en" ? "Dark mode" : "Mode gelap"} value={t.dark} onChange={(v) => setTweak("dark", v)}/>
+
+          <TweakSection label={t.lang === "en" ? "Typography" : "Tipografi"}/>
+          <TweakRadio
+            label={t.lang === "en" ? "Pairing" : "Pasangan"}
+            value={t.type}
+            options={["display", "geometric", "neutral"]}
+            onChange={(v) => setTweak("type", v)}
+          />
+
+          <TweakSection label={t.lang === "en" ? "Density" : "Kerapatan"}/>
+          <TweakRadio
+            label={t.lang === "en" ? "Spacing" : "Spasi"}
+            value={t.density}
+            options={["compact", "regular", "comfy"]}
+            onChange={(v) => setTweak("density", v)}
+          />
+
+          <TweakSection label={t.lang === "en" ? "User state" : "Status pengguna"}/>
+          <TweakRadio
+            label="Plan"
+            value={t.plan}
+            options={["free", "basic", "advanced", "pro"]}
+            onChange={(v) => setTweak("plan", v)}
+          />
+
+          <TweakSection label={t.lang === "en" ? "Language" : "Bahasa"}/>
+          <TweakRadio
+            label="UI"
+            value={t.lang}
+            options={["id", "en"]}
+            onChange={(v) => setTweak("lang", v)}
+          />
+        </TweaksPanel>
+      </DesignCanvas>
+
+      {/* Tombol kembali ke prototype mode — di luar DesignCanvas agar tidak kena transform */}
+      <button
+        onClick={() => setMode("prototype")}
+        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.04)'}
+        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+        style={{
+          position: 'fixed', bottom: 24, right: 24, zIndex: 9999,
+          background: 'linear-gradient(135deg, #6B3FA0, #8B5CF6)',
+          color: '#fff', border: 'none', borderRadius: 14,
+          padding: '11px 20px', fontSize: 14, fontWeight: 600,
+          cursor: 'pointer', fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif',
+          boxShadow: '0 4px 24px rgba(107,63,160,0.5)',
+          display: 'flex', alignItems: 'center', gap: 8,
+          transition: 'transform .15s',
+        }}>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M3 2l9 5-9 5z"/></svg>
+        Play Prototype
+      </button>
+    </React.Fragment>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
