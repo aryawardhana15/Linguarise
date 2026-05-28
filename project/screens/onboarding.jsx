@@ -18,13 +18,10 @@ const ScreenSplash = ({ t, onDone }) => {
       </div>
       <div style={{
         animation: "splashFade 1.4s var(--lr-ease-out) both",
-        display: "flex", flexDirection: "column", alignItems: "center", gap: 18, position: "relative",
+        display: "flex", flexDirection: "column", alignItems: "center", gap: 24, position: "relative",
       }}>
-        <div style={{ background: "white", padding: 18, borderRadius: 24, boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }}>
-          <LRLogo size={64}/>
-        </div>
-        <div style={{ fontFamily: "var(--lr-font-display)", fontSize: 40, fontWeight: 600, letterSpacing: -1 }}>linguarise</div>
-        <div style={{ fontSize: 13, opacity: 0.85, fontStyle: "italic" }}>Speak with Purpose. Rise with Confidence.</div>
+        <LRLogo width={260}/>
+        <div style={{ fontSize: 13, opacity: 0.8, fontStyle: "italic" }}>Speak with Purpose. Rise with Confidence.</div>
       </div>
       <style>{`@keyframes splashFade { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }`}</style>
     </Screen>

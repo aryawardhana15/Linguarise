@@ -61,11 +61,8 @@ const ScreenHome = ({ t, plan, onNav, onScreen }) => {
       {/* Top bar */}
       <div style={{ paddingTop: 56 }}/>
       <div style={{ padding: "0 var(--lr-pad-screen) 8px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <LRLogo size={32}/>
-          <div>
-            <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: -0.4, fontFamily: "var(--lr-font-display)" }}>linguarise</div>
-          </div>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <LRLogo width={120}/>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <button style={{ position: "relative", width: 40, height: 40, borderRadius: 12, border: "none", background: "var(--lr-bg-elev)", boxShadow: "var(--lr-shadow-sm)", cursor: "pointer" }}>

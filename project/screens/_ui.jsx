@@ -52,18 +52,20 @@ const Icon = ({ name, size = 22, color = "currentColor", strokeWidth = 1.8, ...r
 };
 
 // ───────────────────────────────────────────────────────
-// Logo — 3-layer mark (Human · AI · Career stack)
+// Logo — gunakan file gambar dari uploads/logo.png
 // ───────────────────────────────────────────────────────
-const LRLogo = ({ size = 28, color = "var(--lr-primary-600)", accent = "var(--lr-accent)" }) => (
-  <svg width={size} height={size} viewBox="0 0 32 32" aria-label="LinguaRise">
-    {/* Bottom: career bar */}
-    <rect x="3" y="22" width="26" height="6" rx="3" fill={color} opacity="0.25"/>
-    {/* Middle: AI diamond */}
-    <rect x="6" y="13" width="20" height="6" rx="3" fill={color} opacity="0.55"/>
-    {/* Top: human dot rising */}
-    <rect x="10" y="4" width="12" height="6" rx="3" fill={color}/>
-    <circle cx="24" cy="7" r="2.5" fill={accent}/>
-  </svg>
+const LRLogo = ({ size = 28, width, height }) => (
+  <img
+    src="uploads/logo.png"
+    alt="LinguaRise"
+    style={{
+      width: width || size,
+      height: height || "auto",
+      display: "block",
+      flexShrink: 0,
+      objectFit: "contain",
+    }}
+  />
 );
 
 // ───────────────────────────────────────────────────────
