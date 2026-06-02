@@ -86,7 +86,7 @@ const ScreenPricing = ({ t, plan, onScreen, onPlan }) => {
         })}
       </div>
       <div style={{ padding: "16px var(--lr-pad-screen) 0", textAlign: "center", fontSize: 11, color: "var(--lr-ink-3)", lineHeight: 1.5 }}>
-        {t === "en" ? "Cancel anytime · Sertifikasi ISO 27001 · UU PDP compliant" : "Batalkan kapan saja · Sertifikasi ISO 27001 · UU PDP"}
+        {t === "en" ? "Cancel anytime · ISO 27001 Certified · PDP Compliant" : "Batalkan kapan saja · Sertifikasi ISO 27001 · UU PDP"}
       </div>
     </Screen>
   );

@@ -184,9 +184,8 @@ const ScreenLogin = ({ t, onScreen }) => {
       <div style={{ paddingTop: 56 }}/>
       <TopBar left={<button onClick={() => onScreen("welcome")} style={{ width: 36, height: 36, borderRadius: 10, background: "var(--lr-bg-elev)", border: "none", boxShadow: "var(--lr-shadow-sm)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}><Icon name="chevL" size={18}/></button>} transparent/>
       <div style={{ flex: 1, padding: "16px var(--lr-pad-screen)", display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <LRLogo size={40}/>
-          <div style={{ fontFamily: "var(--lr-font-display)", fontSize: 22, fontWeight: 600, letterSpacing: -0.4 }}>linguarise</div>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <LRLogo width={120}/>
         </div>
         <h2 style={{ fontFamily: "var(--lr-font-display)", fontSize: 30, fontWeight: 600, margin: "32px 0 6px", letterSpacing: -0.6 }}>{t === "en" ? "Welcome back" : "Selamat datang"}</h2>
         <div style={{ fontSize: 14, color: "var(--lr-ink-2)", lineHeight: 1.5 }}>{t === "en" ? "Sign in to continue your speaking journey." : "Masuk untuk lanjutkan perjalanan speaking-mu."}</div>
