@@ -119,13 +119,13 @@ const ScreenSimSession = ({ t, onScreen }) => {
           {[
             { ic: "mic", color: "rgba(255,255,255,0.15)" },
             { ic: "cam", color: "rgba(255,255,255,0.15)" },
-            { ic: "end", color: "var(--lr-accent-2)", big: true },
+            { ic: "end", color: "var(--lr-accent-2)", big: true, action: () => onScreen("simReport") },
             { ic: "chevR", color: "rgba(255,255,255,0.15)" },
             { ic: "ai", color: "rgba(255,214,74,0.18)" },
           ].map((c, i) => (
-            <button key={i} style={{
+            <button key={i} onClick={c.action} style={{
               width: c.big ? 60 : 48, height: c.big ? 60 : 48, borderRadius: "50%",
-              background: c.color, border: "none", color: c.ic === "end" ? "white" : "white",
+              background: c.color, border: "none", color: "white",
               display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
               backdropFilter: "blur(20px)",
             }}>

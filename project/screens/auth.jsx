@@ -206,7 +206,7 @@ const ScreenLogin = ({ t, onScreen }) => {
             </div>
           </div>
           <div style={{ textAlign: "right", marginTop: -4 }}>
-            <button style={{ background: "transparent", border: "none", color: "var(--lr-primary-600)", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>{t === "en" ? "Forgot password?" : "Lupa password?"}</button>
+            <button onClick={() => onScreen("forgotPassword")} style={{ background: "transparent", border: "none", color: "var(--lr-primary-600)", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>{t === "en" ? "Forgot password?" : "Lupa password?"}</button>
           </div>
         </div>
 

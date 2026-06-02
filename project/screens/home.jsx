@@ -212,7 +212,9 @@ const ScreenHome = ({ t, plan, onNav, onScreen }) => {
           <div style={{ fontSize: 12, fontWeight: 700, color: "var(--lr-ink-2)", letterSpacing: 0.3, textTransform: "uppercase" }}>
             {t === "en" ? "Recent" : "Aktivitas terakhir"}
           </div>
-          <button style={{ background: "transparent", border: "none", color: "var(--lr-primary-600)", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>{t === "en" ? "See all" : "Lihat semua"}</button>
+          <button onClick={() => onScreen("leaderboard")} style={{ background: "transparent", border: "none", color: "var(--lr-primary-600)", fontWeight: 700, fontSize: 12, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+            <Icon name="chart" size={13} color="var(--lr-primary-600)"/> {t === "en" ? "Leaderboard" : "Peringkat"}
+          </button>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {[

@@ -39,6 +39,7 @@
 <script type="text/babel" src="screens/pricing.jsx"></script>
 <script type="text/babel" src="screens/extras.jsx"></script>
 <script type="text/babel" src="screens/safety_more.jsx"></script>
+<script type="text/babel" src="screens/new_screens.jsx"></script>
 
 <script type="text/babel" data-presets="react">
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -151,9 +152,11 @@ function App() {
 
   const screenMap = {
     splash: <ScreenSplash {...screenProps} onDone={() => setScreen("welcome")}/>,
-    welcome: <ScreenWelcome {...screenProps} onDone={() => setScreen("register")}/>,
+    welcome: <ScreenWelcome {...screenProps} onDone={() => setScreen("goalSelection")}/>,
+    goalSelection: <ScreenGoalSelection {...screenProps}/>,
     register: <ScreenRegister {...screenProps} onDone={() => setScreen("placement")}/>,
     login: <ScreenLogin {...screenProps}/>,
+    forgotPassword: <ScreenForgotPassword {...screenProps}/>,
     parental: <ScreenParental {...screenProps}/>,
     placement: <ScreenPlacement {...screenProps} onDone={() => setScreen("home")}/>,
     home: <ScreenHome {...screenProps}/>,
@@ -173,6 +176,8 @@ function App() {
     simSession: <ScreenSimSession {...screenProps}/>,
     simReport: <ScreenSimReport {...screenProps}/>,
     score: <ScreenScore {...screenProps}/>,
+    leaderboard: <ScreenLeaderboard {...screenProps}/>,
+    dailyComplete: <ScreenDailyComplete {...screenProps}/>,
     pricing: <ScreenPricing {...screenProps}/>,
     paymentSuccess: <ScreenPaymentSuccess {...screenProps}/>,
     profile: <ScreenProfile {...screenProps}/>,
@@ -210,7 +215,9 @@ function App() {
       screens: [
         { id: "splash", label: "Splash" },
         { id: "welcome", label: "Welcome" },
+        { id: "goalSelection", label: "Goal Selection" },
         { id: "login", label: "Login" },
+        { id: "forgotPassword", label: "Forgot Password" },
         { id: "register", label: "Register · OTP · Setup" },
         { id: "parental", label: "Parental Consent (<17)" },
         { id: "placement", label: "Placement + CEFR" },
@@ -249,6 +256,8 @@ function App() {
         { id: "simSession", label: "Sim · In-Session" },
         { id: "simReport", label: "Sim · Report" },
         { id: "score", label: "LinguaScore Detail" },
+        { id: "leaderboard", label: "Leaderboard" },
+        { id: "dailyComplete", label: "Daily Challenge Complete" },
       ],
     },
     {

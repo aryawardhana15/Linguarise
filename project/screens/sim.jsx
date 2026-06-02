@@ -146,7 +146,7 @@ const ScreenSimReport = ({ t, onScreen, plan }) => {
 
       {/* CTA */}
       <div style={{ padding: "20px var(--lr-pad-screen) 0", display: "flex", gap: 10 }}>
-        <Btn variant="ghost" size="md" style={{ flex: 1 }} onClick={() => onScreen("home")}>{t === "en" ? "Done" : "Selesai"}</Btn>
+        <Btn variant="ghost" size="md" style={{ flex: 1 }} onClick={() => onScreen("dailyComplete")}>{t === "en" ? "Done" : "Selesai"}</Btn>
         <Btn variant="primary" size="md" style={{ flex: 1.5 }} trailing={<Icon name="arrowR" size={14}/>}>{t === "en" ? "Retry · Hard mode" : "Ulangi · Mode Sulit"}</Btn>
       </div>
     </Screen>
